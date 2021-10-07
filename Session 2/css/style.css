@@ -1,15 +1,20 @@
 #pokemonList {
     display: flex;
-    align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
     margin: 50px;
+    font-family: 'Courier New', Courier, monospace
 }
 
 .pokemon {
     padding: 20px;
+    width: 20%;
 }
 
 h1 {
     font-size: 24px;
+}
+
+#types {
+    font-size: 12px;
 }
