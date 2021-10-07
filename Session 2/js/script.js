@@ -4,8 +4,12 @@ import Team from "./team.js";
 
 function getData() {
     const content = document.getElementById("pokemonList");
+    const body = document.getElementById("text");
     content.innerHTML = " ";
+
     let team = new Team();
+    body.innerHTML = team.describe();
+
     fetch(`https://pokeapi.co/api/v2/pokemon?limit=151`)
         .then(response => response.json())
         .then(data => {
