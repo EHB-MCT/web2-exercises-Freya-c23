@@ -2,13 +2,14 @@
 
 import Team from "./team.js";
 
+let pokemonArray = [];
+let team = new Team();
+
 function getData() {
     const content = document.getElementById("pokemonList");
-    const body = document.getElementById("text");
     content.innerHTML = " ";
 
-    let team = new Team();
-    body.innerHTML = team.describe();
+    document.getElementById("text").innerHTML = team.describe();
 
     fetch(`https://pokeapi.co/api/v2/pokemon?limit=151`)
         .then(response => response.json())
@@ -17,15 +18,16 @@ function getData() {
                 fetch(poke.url)
                     .then(response => response.json())
                     .then(data2 => {
-                        const pokList = `
-                        <div class="pokemon">
-                            <img src="${data2.sprites.front_default}" alt="">
-                            <p>nr.${data2.id}</p>
-                            <h1 id="name">${poke.name}</h1>
-                            <div id="types">${data2.types}</div>
-                            <button id="${data2.id}">add to team</button>
-                        </div>`;
-                        content.insertAdjacentHTML("beforeend", pokList);
+                        pokemonArray.push(data2);
+                        // const pokList = `
+                        // <div class="pokemon">
+                        //     <img src="${data2.sprites.front_default}" alt="">
+                        //     <p>nr.${data2.id}</p>
+                        //     <h1 id="name">${poke.name}</h1>
+                        //     <div id="types">${data2.types}</div>
+                        //     <button id="${data2.id}">add to team</button>
+                        // </div>`;
+                        // content.insertAdjacentHTML("beforeend", pokList);
                     });
             });
         });
