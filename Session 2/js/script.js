@@ -1,10 +1,11 @@
 'use strict';
 
-import team from "./team.js";
+import Team from "./team.js";
 
 function getData() {
     const content = document.getElementById("pokemonList");
     content.innerHTML = " ";
+    let team = new Team();
     fetch(`https://pokeapi.co/api/v2/pokemon?limit=151`)
         .then(response => response.json())
         .then(data => {
