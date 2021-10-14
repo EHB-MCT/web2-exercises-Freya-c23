@@ -1,14 +1,15 @@
 'use strict';
 
-let baseurl = `http://www.omdbapi.com/?&apikey=f5c8e719`;
+let baseurl = `http://www.omdbapi.com/`;
 
 window.onload = function () {
-
-    let url = baseurl + `t=${movie}`;
+    let movie = "Parasite";
+    let url = baseurl + `?s=${movie}` + `&apikey=f5c8e719`;
+    getData(url);
 };
 
 async function getData(url) {
-    let fetchUrl = await fetch(url);
-    let response = await fetchUrl.json();
-
+    let response = await fetch(url);
+    let json = await response.json();
+    console.log(json);
 }
