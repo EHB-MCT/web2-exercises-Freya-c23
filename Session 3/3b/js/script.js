@@ -3,13 +3,23 @@
 let baseurl = `http://www.omdbapi.com/`;
 
 window.onload = function () {
-    let movie = "Parasite";
-    let url = baseurl + `?s=${movie}` + `&apikey=f5c8e719`;
-    getData(url);
+    document.getElementById('searchform').addEventListener('submit', e => {
+        let url = baseurl + `?t=${document.getElementById('inputTitle').value}` + `&apikey=f5c8e719`;
+        getData(url).then(movie => {
+            addMovie(movie);
+        });
+    });
 };
 
 async function getData(url) {
     let response = await fetch(url);
-    let json = await response.json();
-    console.log(json);
+    return await response.json();
+}
+
+function addMovie(m) {
+    document.getElementById('poster').src = m.Poster;
+    document.getElementById('title').src = m.Title;
+    document.getElementById('desc').src = m.Plot;
+    document.getElementById('runtime').src = m.Runtime;
+
 }
