@@ -1,32 +1,24 @@
 'use strict';
 window.onload = function () {
-    let inputNumber = document.getElementById("button").addEventListener('click', e => {
-        e.preventDefault();
-        let number = document.getElementById('numb').value;
-        console.log(number);
-        compareNumber(document.getElementById('numb').value).then(message => {
-            document.getElementById('text').innerText = message;
-        });
+    randomNumber();
+    document.getElementById("button").addEventListener('click', e => {
+        let message = '';
+        compareNumber(document.getElementById('numb').value).then(
+            result => addMessage(result, 'S'),
+            error => addMessage(error, 'E')
+        );
     });
-}
+};
 
-function compareNumber() {
+function compareNumber(nr) {
     return new Promise(function (resolve, reject) {
-        resolve("juist");
+        if (nr < compNumber) reject('Go higher');
+        else if (nr > compNumber) reject('Go lower');
+        else if (nr == compNumber) resolve('JEEEEJ');
     });
-
-    let compNumber = Math.floor(Math.random() * 21);
-
-
-    // let promise = new Promise(function (resolve, reject) {
-    //     resolve(compNumber);
-    //     reject(isNaN(inputNumber));
-    // });
-
-    // promise.then(
-    //     result => console.log(result, "You have guessed the mystery number!"),
-    //     error => console.log(error, "That is not a valid number")
-    // );
 }
 
-compareNumber();
+function randomNumber() {
+    let compNumber = Math.floor(Math.random() * 21);
+    return compNumber;
+}
